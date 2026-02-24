@@ -15,6 +15,10 @@ params:query {
   endTo: 2027-02-24T23:59:59.999Z
 }
 
+headers {
+  Authorization: Bearer {{TOKEN}}
+}
+
 auth:bearer {
   token: {{TOKEN}}
 }

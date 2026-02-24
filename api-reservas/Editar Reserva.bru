@@ -1,0 +1,35 @@
+meta {
+  name: Editar Reserva
+  type: http
+  seq: 8
+}
+
+put {
+  url: {{BASE_URL}}/reservations/{{RESERVATION_ID}}
+  body: json
+  auth: bearer
+}
+
+headers {
+  Authorization: Bearer {{TOKEN}}
+}
+
+auth:bearer {
+  token: {{TOKEN}}
+}
+
+body:json {
+  {
+    "status": "confirmed",
+    "notes": "Actualizada desde Bruno"
+  }
+}
+
+vars:pre-request {
+  RESERVATION_ID: 699ce646582e1a55546018f3
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

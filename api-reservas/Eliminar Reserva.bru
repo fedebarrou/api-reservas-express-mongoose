@@ -1,17 +1,13 @@
 meta {
-  name: Buscar Coincidencias (Nombre y Tipo)
+  name: Eliminar Reserva
   type: http
-  seq: 6
+  seq: 9
 }
 
-get {
-  url: {{BASE_URL}}/reservations?q=Dogineitor
+delete {
+  url: {{BASE_URL}}/reservations/{{RESERVATION_ID}}
   body: none
   auth: bearer
-}
-
-params:query {
-  q: Dogineitor
 }
 
 headers {
@@ -20,6 +16,10 @@ headers {
 
 auth:bearer {
   token: {{TOKEN}}
+}
+
+vars:pre-request {
+  RESERVATION_ID: 699cf2e91ddba64e7ec2940d
 }
 
 settings {
