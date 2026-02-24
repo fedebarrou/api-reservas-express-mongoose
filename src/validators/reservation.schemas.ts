@@ -45,4 +45,6 @@ export const listReservationQuerySchema = z.object({
   page: z.coerce.number().int().min(1).optional(),
   limit: z.coerce.number().int().min(1).max(100).optional(),
   sort: z.string().optional(),
+  endFrom: isoDate.optional(),
+  endTo: isoDate.optional(),
 });

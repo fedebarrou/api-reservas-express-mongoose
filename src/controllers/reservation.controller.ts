@@ -41,12 +41,15 @@ export async function listReservations(req: Request, res: Response, next: NextFu
     if (q.email) filter.email = q.email;
 
     if (q.q) {
+      const needle = q.q.trim();
       filter.$or = [
-        { name: { $regex: q.q, $options: "i" } },
-        { itemName: { $regex: q.q, $options: "i" } },
-        { itemType: { $regex: q.q, $options: "i" } },
+        { name: { $regex: needle, $options: "i" } },
+        { itemName: { $regex: needle, $options: "i" } },
+        { itemType: { $regex: needle, $options: "i" } },
       ];
     }
+
+    const anyQ = q as typeof q & { endFrom?: string; endTo?: string };
 
     if (q.from || q.to) {
       filter.startAt = {};
@@ -54,11 +57,25 @@ export async function listReservations(req: Request, res: Response, next: NextFu
       if (q.to) filter.startAt.$lte = new Date(q.to);
     }
 
+    if (anyQ.endFrom || anyQ.endTo) {
+      filter.endAt = {};
+      if (anyQ.endFrom) filter.endAt.$gte = new Date(anyQ.endFrom);
+      if (anyQ.endTo) filter.endAt.$lte = new Date(anyQ.endTo);
+    }
+
+
     const page = q.page ?? 1;
     const limit = q.limit ?? 10;
     const skip = (page - 1) * limit;
 
-    const sort = q.sort ?? "-createdAt";
+    const allowedSortFields = new Set(["createdAt", "startAt", "endAt", "status", "email", "name", "itemName", "itemType"]);
+    const rawSort = (q.sort ?? "-createdAt").trim();
+
+    const sortDir = rawSort.startsWith("-") ? -1 : 1;
+    const sortField = rawSort.replace(/^-/, "");
+    const sort: Record<string, 1 | -1> = allowedSortFields.has(sortField)
+      ? { [sortField]: sortDir }
+      : { createdAt: -1 };
 
     const [items, total] = await Promise.all([
       Reservation.find(filter).sort(sort).skip(skip).limit(limit),

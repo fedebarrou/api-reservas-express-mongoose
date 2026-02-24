@@ -5,14 +5,14 @@ meta {
 }
 
 get {
-  url: {{BASE_URL}}/reservations?from=2026-02-22T00:00:00.000Z&to=2026-02-23T00:00:00.000Z
+  url: {{BASE_URL}}/reservations?endFrom=2026-02-24T00:00:00.000Z&endTo=2027-02-24T23:59:59.999Z
   body: none
   auth: bearer
 }
 
 params:query {
-  from: 2026-02-22T00:00:00.000Z
-  to: 2026-02-23T00:00:00.000Z
+  endFrom: 2026-02-24T00:00:00.000Z
+  endTo: 2027-02-24T23:59:59.999Z
 }
 
 auth:bearer {
