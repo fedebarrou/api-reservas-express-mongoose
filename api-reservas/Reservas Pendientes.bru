@@ -1,0 +1,26 @@
+meta {
+  name: Reservas Pendientes
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{BASE_URL}}/reservations?status=pending&page=1&limit=10
+  body: none
+  auth: bearer
+}
+
+params:query {
+  status: pending
+  page: 1
+  limit: 10
+}
+
+auth:bearer {
+  token: {{TOKEN}}
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

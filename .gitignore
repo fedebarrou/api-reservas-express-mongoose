@@ -1,0 +1,10 @@
+# Dependencias
+node_modules/
+
+# Archivos de entorno (Credenciales de Mongoose/DB)
+.env
+
+# Cobertura y builds
+dist/
+build/
+

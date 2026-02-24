@@ -1,0 +1,25 @@
+meta {
+  name: Buscar Reservas entre fechas
+  type: http
+  seq: 7
+}
+
+get {
+  url: {{BASE_URL}}/reservations?from=2026-02-22T00:00:00.000Z&to=2026-02-23T00:00:00.000Z
+  body: none
+  auth: bearer
+}
+
+params:query {
+  from: 2026-02-22T00:00:00.000Z
+  to: 2026-02-23T00:00:00.000Z
+}
+
+auth:bearer {
+  token: {{TOKEN}}
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

@@ -1,0 +1,24 @@
+meta {
+  name: Buscar Coincidencias (Nombre y Tipo)
+  type: http
+  seq: 6
+}
+
+get {
+  url: {{BASE_URL}}/reservations?q=Dogineitor
+  body: none
+  auth: bearer
+}
+
+params:query {
+  q: Dogineitor
+}
+
+auth:bearer {
+  token: {{TOKEN}}
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
