@@ -90,13 +90,6 @@ Ordenamiento: ?sort=startAt ?sort=-startAt
 
 ------------------------------------------------------------------------
 
-## 📂 Variables de entorno
-
-PORT=5000 MONGO_URI=mongodb://127.0.0.1:27017/api_reservas
-JWT_SECRET=super_secret_cambiame JWT_EXPIRES_IN=2h
-
-------------------------------------------------------------------------
-
 ## ▶️ Instalación
 
 npm install npm run dev
